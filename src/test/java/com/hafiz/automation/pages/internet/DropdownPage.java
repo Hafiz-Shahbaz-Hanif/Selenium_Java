@@ -19,11 +19,18 @@ public class DropdownPage extends BasePage {
         return this;
     }
 
-    public void select(String visibleText) {
+    public DropdownPage select(String visibleText) {
         new Select(dropdown).selectByVisibleText(visibleText);
+        return this;
     }
 
     public String selectedOption() {
         return new Select(dropdown).getFirstSelectedOption().getText().trim();
+    }
+
+    public java.util.List<String> options() {
+        return new Select(dropdown).getOptions().stream()
+                .map(o -> o.getText().trim())
+                .toList();
     }
 }
