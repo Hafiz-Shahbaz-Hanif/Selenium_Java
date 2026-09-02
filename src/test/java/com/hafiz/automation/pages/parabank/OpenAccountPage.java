@@ -1,9 +1,12 @@
 package com.hafiz.automation.pages.parabank;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.hafiz.automation.pages.BasePage;
 
@@ -23,9 +26,10 @@ public class OpenAccountPage extends BasePage {
     private WebElement newAccountId;
 
     public OpenAccountPage chooseType(String type) {
-        // The "from" account list is populated by an AJAX call - wait for it
-        // before interacting with the form.
-        wait.until(d -> new Select(fromAccount).getOptions().size() > 0);
+        // The "from" account list is populated by an AJAX call that the ParaBank
+        // demo is sometimes slow to answer - wait generously before proceeding.
+        new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(d -> !new Select(fromAccount).getOptions().isEmpty());
         wait.until(ExpectedConditions.elementToBeClickable(accountType));
         new Select(accountType).selectByVisibleText(type);
         return this;

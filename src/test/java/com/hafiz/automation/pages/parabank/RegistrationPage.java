@@ -5,9 +5,13 @@ import org.openqa.selenium.support.FindBy;
 
 import com.hafiz.automation.config.Configuration;
 import com.hafiz.automation.pages.BasePage;
+import com.hafiz.automation.utils.TestData;
 
 /** ParaBank &rarr; /register.htm. */
 public class RegistrationPage extends BasePage {
+
+    /** The password every generated customer is registered with. */
+    public static final String PASSWORD = "Password123!";
 
     @FindBy(id = "customer.firstName")
     private WebElement firstName;
@@ -72,5 +76,19 @@ public class RegistrationPage extends BasePage {
 
     public String confirmationMessage() {
         return textOf(confirmation);
+    }
+
+    /**
+     * Register a brand-new customer (unique username) and leave the browser
+     * logged in as them. Returns the generated username.
+     */
+    public String registerRandomCustomer() {
+        String username = TestData.uniqueUsername("hafiz");
+        open();
+        registerNewCustomer(username, PASSWORD);
+        if (!confirmationMessage().contains("Your account was created successfully")) {
+            throw new IllegalStateException("Registration failed: " + confirmationMessage());
+        }
+        return username;
     }
 }
