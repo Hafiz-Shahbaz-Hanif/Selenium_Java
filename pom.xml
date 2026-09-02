@@ -74,6 +74,8 @@
                         <headless>${headless}</headless>
                         <browser>${browser}</browser>
                     </systemPropertyVariables>
+                    <!-- Hard ceiling so a wedged browser can never hang CI forever. -->
+                    <forkedProcessTimeoutInSeconds>2400</forkedProcessTimeoutInSeconds>
                 </configuration>
             </plugin>
         </plugins>
@@ -94,6 +96,18 @@
             <id>smoke</id>
             <properties>
                 <suite.file>src/test/resources/smoke.xml</suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>internet</id>
+            <properties>
+                <suite.file>src/test/resources/internet.xml</suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>parabank</id>
+            <properties>
+                <suite.file>src/test/resources/parabank.xml</suite.file>
             </properties>
         </profile>
     </profiles>

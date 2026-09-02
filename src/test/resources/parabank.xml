@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="UI Regression" parallel="methods" thread-count="2" verbose="1">
+<suite name="parabank" parallel="methods" thread-count="2" verbose="1">
 
     <listeners>
         <listener class-name="com.hafiz.automation.listeners.TestListener"/>
     </listeners>
 
-    <test name="the-internet">
-        <packages>
-            <package name="com.hafiz.automation.tests.internet"/>
-        </packages>
-    </test>
-
     <test name="parabank">
-        <!-- The ParaBank public demo is periodically reset; keep its threads low. -->
         <packages>
             <package name="com.hafiz.automation.tests.parabank"/>
         </packages>
