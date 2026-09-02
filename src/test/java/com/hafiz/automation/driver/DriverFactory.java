@@ -3,6 +3,7 @@ package com.hafiz.automation.driver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -32,6 +33,15 @@ public final class DriverFactory {
             throw new IllegalStateException("Driver not initialised for this thread");
         }
         return driver;
+    }
+
+    static {
+        // Pin a cached chromedriver if one is available, so ChromeDriver never
+        // has to shell out to Selenium Manager during a parallel run.
+        if (System.getProperty("webdriver.chrome.driver") == null) {
+            LocalDriverCache.newestChromedriver()
+                    .ifPresent(path -> System.setProperty("webdriver.chrome.driver", path));
+        }
     }
 
     public static void create() {
@@ -68,7 +78,13 @@ public final class DriverFactory {
             options.addArguments("--headless=new");
         }
         options.addArguments("--window-size=1920,1080", "--no-sandbox", "--disable-dev-shm-usage",
-                "--disable-gpu", "--remote-allow-origins=*");
+                "--disable-gpu");
+        // the-internet embeds third-party analytics that can keep both `load` and
+        // even DOMContentLoaded pending indefinitely. NONE hands control back as
+        // soon as navigation starts; every Page Object's open() then waits on its
+        // own landmark element, which is the reliable readiness signal anyway.
+        options.setPageLoadStrategy(PageLoadStrategy.NONE);
+        options.setExperimentalOption("excludeSwitches", java.util.List.of("enable-automation"));
         return options;
     }
 
