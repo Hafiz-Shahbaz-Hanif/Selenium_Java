@@ -30,6 +30,10 @@ and **ExtentReports** reporting with failure screenshots.
   intent-revealing methods (`loginPage.loginAsValidUser()`), never locators.
 - **Thread-safe parallelism.** `DriverFactory` hands out a `ThreadLocal<WebDriver>`,
   so `parallel="methods"` runs cleanly with a fresh browser per test.
+- **Resilient driver + navigation.** A cached chromedriver is used when present so a
+  parallel run never stalls on Selenium Manager first-resolution; `pageLoadStrategy=NONE`
+  plus a DOM-ready wait in `BasePage.open()` keeps navigation fast even when a target's
+  `load` event never fires (the-internet embeds slow third-party analytics).
 - **Two applications.**
   - *the-internet* — form auth, AJAX-rendered elements, dropdowns, dynamic DOM.
   - *ParaBank* — a full journey: register a unique customer, then open a second
@@ -38,29 +42,42 @@ and **ExtentReports** reporting with failure screenshots.
   ExtentReports node and attaches a screenshot on failure.
 - **Config as code.** `Configuration` resolves every key in order:
   `-Dkey` system property → environment variable → `config.properties` → default.
-- **Grouped suites.** TestNG groups (`smoke`, `internet`, `parabank`) allow
-  `mvn test -Dgroups=internet` to skip the ParaBank public demo if it is down.
+- **Grouped, profile-driven suites.** `./mvnw test -Pinternet` / `-Pparabank` / `-Psmoke`,
+  or `-Dgroups=internet` to skip the ParaBank public demo if it is down.
+- **Data-driven at scale.** ~100 `@Test` methods, most fed by a `@DataProvider`
+  (8 add-remove counts, 10 key presses, 6 slider positions, 4 status codes, 4 table
+  sorts, …).
+- **Developed with an agentic-AI workflow.** `CLAUDE.md` plus `.claude/` subagents
+  (`failure-triager`, `page-object-author`) and skills (`new-page-coverage`, `extent-triage`).
+
+## Coverage — ~100 `@Test` methods
+
+| Area | Tests | Highlights |
+|---|---|---|
+| the-internet — auth | 11 | valid login, 7-row bad-credentials data set, logout |
+| the-internet — forms & inputs | 33 | checkboxes, dropdown, number input, 10 key presses, JS alert / confirm / prompt |
+| the-internet — dynamic DOM | 13 | dynamic loading (1 & 2), AJAX enable/disable & add/remove, notification message, status codes |
+| the-internet — interactions | 26 | hovers, horizontal slider, sortable tables, drag & drop, context menu, iframe editor, multiple windows |
+| the-internet — resilience | 8 | disappearing elements, typos-that-settle, floating menu, forgot-password |
+| ParaBank | 11 | register → open account (CHECKING/SAVINGS), transfer funds, bill pay, request loan, logout |
 
 ## Project structure
 
 ```
+CLAUDE.md  .claude/{agents,skills}       # agentic-AI workflow config (repo root)
 src/test/java/com/hafiz/automation/
-├── config/Configuration.java        # layered configuration
-├── driver/DriverFactory.java        # ThreadLocal WebDriver (chrome/firefox/remote)
+├── config/Configuration.java           # layered configuration
+├── driver/DriverFactory.java           # ThreadLocal WebDriver (chrome/firefox/remote)
 ├── pages/
-│   ├── BasePage.java                # PageFactory init + element helpers
-│   ├── internet/                    # the-internet page objects
-│   └── parabank/                    # ParaBank page objects
-├── listeners/
-│   ├── ExtentManager.java           # ExtentReports singleton
-│   └── TestListener.java            # per-test node + failure screenshots
-├── base/BaseTest.java               # driver lifecycle (@BeforeMethod/@AfterMethod)
+│   ├── BasePage.java                   # PageFactory init + element/alert/select helpers
+│   ├── internet/                       # one class per the-internet page
+│   └── parabank/                       # register, overview, open account, transfer, bill pay, loan
+├── listeners/                          # ExtentReports singleton + failure-screenshot listener
+├── base/BaseTest.java                  # driver lifecycle (@BeforeMethod/@AfterMethod)
 ├── utils/TestData.java
-└── tests/
-    ├── internet/                    # AuthenticationTest, InteractionsTest
-    └── parabank/                    # NewCustomerTest
+└── tests/{internet,parabank}/          # one class per feature area, @DataProvider-driven
 src/test/resources/
-├── testng.xml   smoke.xml           # suites
+├── testng.xml  internet.xml  parabank.xml  smoke.xml
 └── config.properties
 ```
 
