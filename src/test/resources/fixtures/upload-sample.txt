@@ -1,0 +1,1 @@
+Sample fixture used by FileUploadTest against the-internet's /upload page.

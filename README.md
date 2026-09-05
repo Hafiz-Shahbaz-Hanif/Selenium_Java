@@ -44,18 +44,18 @@ and **ExtentReports** reporting with failure screenshots.
   `-Dkey` system property → environment variable → `config.properties` → default.
 - **Grouped, profile-driven suites.** `./mvnw test -Pinternet` / `-Pparabank` / `-Psmoke`,
   or `-Dgroups=internet` to skip the ParaBank public demo if it is down.
-- **Data-driven at scale.** ~100 `@Test` methods, most fed by a `@DataProvider`
+- **Data-driven at scale.** ~102 `@Test` methods, most fed by a `@DataProvider`
   (8 add-remove counts, 10 key presses, 6 slider positions, 4 status codes, 4 table
-  sorts, …).
+  sorts, 2 file-upload fixtures, …).
 - **Developed with an agentic-AI workflow.** `CLAUDE.md` plus `.claude/` subagents
   (`failure-triager`, `page-object-author`) and skills (`new-page-coverage`, `extent-triage`).
 
-## Coverage — ~100 `@Test` methods
+## Coverage — ~102 `@Test` methods
 
 | Area | Tests | Highlights |
 |---|---|---|
 | the-internet — auth | 11 | valid login, 7-row bad-credentials data set, logout |
-| the-internet — forms & inputs | 33 | checkboxes, dropdown, number input, 10 key presses, JS alert / confirm / prompt |
+| the-internet — forms & inputs | 35 | checkboxes, dropdown, number input, 10 key presses, JS alert / confirm / prompt, file upload (2 fixtures) |
 | the-internet — dynamic DOM | 13 | dynamic loading (1 & 2), AJAX enable/disable & add/remove, notification message, status codes |
 | the-internet — interactions | 26 | hovers, horizontal slider, sortable tables, drag & drop, context menu, iframe editor, multiple windows |
 | the-internet — resilience | 8 | disappearing elements, typos-that-settle, floating menu, forgot-password |
