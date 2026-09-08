@@ -32,6 +32,13 @@ public class JavaScriptAlertsTest extends BaseTest {
         assertEquals(page.resultText(), "You clicked: Cancel");
     }
 
+    @Test(groups = {"internet"})
+    public void cancellingAPrompt() {
+        JavaScriptAlertsPage page = new JavaScriptAlertsPage().open();
+        page.triggerPromptAndDismiss();
+        assertEquals(page.resultText(), "You entered: null");
+    }
+
     @DataProvider(name = "promptAnswers")
     public Object[][] promptAnswers() {
         return new Object[][] {

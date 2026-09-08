@@ -44,13 +44,13 @@ and **ExtentReports** reporting with failure screenshots.
   `-Dkey` system property → environment variable → `config.properties` → default.
 - **Grouped, profile-driven suites.** `./mvnw test -Pinternet` / `-Pparabank` / `-Psmoke`,
   or `-Dgroups=internet` to skip the ParaBank public demo if it is down.
-- **Data-driven at scale.** ~104 `@Test` methods, most fed by a `@DataProvider`
+- **Data-driven at scale.** ~105 `@Test` methods, most fed by a `@DataProvider`
   (8 add-remove counts, 10 key presses, 6 slider positions, 4 status codes, 4 table
   sorts, 2 file-upload fixtures, …).
 - **Developed with an agentic-AI workflow.** `CLAUDE.md` plus `.claude/` subagents
   (`failure-triager`, `page-object-author`) and skills (`new-page-coverage`, `extent-triage`).
 
-## Coverage — ~104 `@Test` methods
+## Coverage — ~105 `@Test` methods
 
 | Area | Tests | Highlights |
 |---|---|---|

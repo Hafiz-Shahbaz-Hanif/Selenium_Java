@@ -47,6 +47,11 @@ public class JavaScriptAlertsPage extends BasePage {
         return answerPrompt(answer);
     }
 
+    public String triggerPromptAndDismiss() {
+        click(promptButton);
+        return dismissAlert();
+    }
+
     public String resultText() {
         return textOf(result);
     }
