@@ -26,6 +26,14 @@ jobs:
       - name: Run the the-internet suite (headless)
         run: ./mvnw -B test -Pinternet
 
+      - name: Publish TestNG results
+        if: always()
+        uses: mikepenz/action-junit-report@v5
+        with:
+          report_paths: target/surefire-reports/TEST-*.xml
+          check_name: "TestNG results (the-internet)"
+          fail_on_failure: false
+
       - name: Upload ExtentReports + screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -57,6 +65,14 @@ jobs:
 
       - name: Run the ParaBank suite (headless)
         run: ./mvnw -B test -Pparabank
+
+      - name: Publish TestNG results
+        if: always()
+        uses: mikepenz/action-junit-report@v5
+        with:
+          report_paths: target/surefire-reports/TEST-*.xml
+          check_name: "TestNG results (ParaBank)"
+          fail_on_failure: false
 
       - name: Upload ExtentReports + screenshots
         if: always()
