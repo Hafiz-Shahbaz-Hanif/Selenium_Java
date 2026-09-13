@@ -40,6 +40,10 @@ and **ExtentReports** reporting with failure screenshots.
     account and verify it appears in the overview.
 - **Reporting + triage.** A TestNG `ITestListener` mirrors each test into an
   ExtentReports node and attaches a screenshot on failure.
+- **Scoped auto-retry.** `RetryTransformer` wires a 2-attempt `RetryAnalyzer` onto
+  every `parabank`-grouped test only — that public demo is periodically reset and
+  occasionally flaky. the-internet tests never retry; a real failure there stays a
+  real failure.
 - **Config as code.** `Configuration` resolves every key in order:
   `-Dkey` system property → environment variable → `config.properties` → default.
 - **Grouped, profile-driven suites.** `./mvnw test -Pinternet` / `-Pparabank` / `-Psmoke`,

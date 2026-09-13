@@ -4,6 +4,7 @@
 
     <listeners>
         <listener class-name="com.hafiz.automation.listeners.TestListener"/>
+        <listener class-name="com.hafiz.automation.listeners.RetryTransformer"/>
     </listeners>
 
     <test name="the-internet">
