@@ -105,6 +105,8 @@ src/test/resources/
 `.github/workflows/ci.yml` runs the headless TestNG suite on every push and PR via the
 Maven wrapper, and uploads the Extent report, surefire reports and screenshots.
 
+See [`CHANGELOG.md`](CHANGELOG.md) for what shipped and when.
+
 ---
 
 ## Author
