@@ -28,7 +28,7 @@ jobs:
 
       - name: Publish TestNG results
         if: always()
-        uses: mikepenz/action-junit-report@v5
+        uses: mikepenz/action-junit-report@v6
         with:
           report_paths: target/surefire-reports/TEST-*.xml
           check_name: "TestNG results (the-internet)"
@@ -68,7 +68,7 @@ jobs:
 
       - name: Publish TestNG results
         if: always()
-        uses: mikepenz/action-junit-report@v5
+        uses: mikepenz/action-junit-report@v6
         with:
           report_paths: target/surefire-reports/TEST-*.xml
           check_name: "TestNG results (ParaBank)"
