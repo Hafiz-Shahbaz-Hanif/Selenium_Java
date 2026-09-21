@@ -2,6 +2,16 @@
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-09-19
+
+### Added
+- Dependabot for `maven` and `github-actions`.
+
+## 2026-09-16
+
+### Added
+- This changelog.
+
 ## 2026-09-13
 
 ### Added
