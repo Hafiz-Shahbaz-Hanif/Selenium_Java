@@ -2,6 +2,12 @@
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-09-23
+
+### Added
+- `RedirectorPage` + test: following the `/redirector` link lands on `/status_codes`
+  (~105→~106 tests).
+
 ## 2026-09-22
 
 ### Added
