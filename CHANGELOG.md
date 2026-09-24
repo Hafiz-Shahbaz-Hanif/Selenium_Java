@@ -2,6 +2,13 @@
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-09-24
+
+### Fixed
+- README headline test count was stale after the Redirector addition (~106 ->
+  the actual ~108, recounted `@Test` methods + `@DataProvider` rows across every
+  test class).
+
 ## 2026-09-23
 
 ### Added
