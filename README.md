@@ -5,6 +5,8 @@
 ![Selenium](https://img.shields.io/badge/Selenium-4.x-43B02A?logo=selenium&logoColor=white)
 ![TestNG](https://img.shields.io/badge/TestNG-7.x-DE322F)
 ![Maven](https://img.shields.io/badge/Maven-wrapper-C71A36?logo=apachemaven&logoColor=white)
+![ExtentReports](https://img.shields.io/badge/Report-ExtentReports-FF7043)
+![Tests](https://img.shields.io/badge/tests-108-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 A UI automation framework built with **Selenium WebDriver**, **Java 21** and **TestNG**, on the
