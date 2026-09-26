@@ -40,7 +40,7 @@ jobs:
 
       - name: Upload ExtentReports + screenshots
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: extent-report-internet
           path: |
@@ -80,7 +80,7 @@ jobs:
 
       - name: Upload ExtentReports + screenshots
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: extent-report-parabank
           path: |
