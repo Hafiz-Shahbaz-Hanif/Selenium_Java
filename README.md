@@ -92,9 +92,16 @@ src/test/resources/
 ```bash
 ./mvnw test                              # full suite (headless)
 ./mvnw test -Psmoke                       # smoke suite only
+./mvnw test -Pinternet                    # the-internet suite only (what CI gates on)
+./mvnw test -Pparabank                    # ParaBank suite only (CI: non-blocking)
 ./mvnw test -Dgroups=internet             # skip the ParaBank demo
 ./mvnw test -Dheadless=false -Dbrowser=firefox
 ```
+
+Every `@Test` carries a site group (`internet` or `parabank`), and the one happy path per
+area also carries `smoke`. `-Dgroups=<name>` filters on top of whichever suite is selected:
+a group that matches nothing runs zero tests (`-Pinternet -Dgroups=doesnotexist` →
+`Tests run: 0`), so the filter is applied, not ignored.
 
 ## Reports
 

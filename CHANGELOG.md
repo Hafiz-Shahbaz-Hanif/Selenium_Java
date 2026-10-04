@@ -2,6 +2,15 @@
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-10-04
+
+### Fixed
+- README's "Running" block now lists the `-Pinternet` and `-Pparabank` profiles
+  (CI uses both) and the group model. The documented `-Dgroups=<name>` was
+  checked rather than assumed: with a suite XML configured, surefire still
+  applies it — `-Pinternet -Dgroups=doesnotexist` ran `Tests run: 0`. All 46
+  `@Test` annotations carry a site group (`internet` / `parabank`).
+
 ## 2026-09-25
 
 ### Added
