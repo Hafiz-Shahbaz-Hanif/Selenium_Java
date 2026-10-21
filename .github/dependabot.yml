@@ -5,8 +5,29 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      selenium:
+        patterns:
+          - "org.seleniumhq.selenium:*"
+      # Build tooling (surefire plugin, Maven itself) moves as one reviewable PR.
+      maven-tooling:
+        patterns:
+          - "org.apache.maven.plugins:*"
+          - "org.apache.maven:*"
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: "ci(deps)"
+    groups:
+      actions:
+        patterns:
+          - "*"
